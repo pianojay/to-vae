@@ -14,7 +14,7 @@ import pandas as pd
 from matplotlib import colors
 import matplotlib.pyplot as plt
 
-def main(nelx,nely,volfrac,penal,rmin,ft, fixed, f, structure_name, loadpoint):
+def main(nelx,nely,volfrac,penal,rmin,ft, fixed, f, dir_name, loadpoint):
     # fixed dofs and force matrix comes as an input.
 
     Emin, Emax = 1e-9, 1.0		# Max and min stiffness
@@ -127,7 +127,7 @@ def main(nelx,nely,volfrac,penal,rmin,ft, fixed, f, structure_name, loadpoint):
             pbar.set_description(f"{elapsed_time = :.2f}")
 
 
-    filename = f"{structure_name}_{nelx}x{nely}\{loadpoint}"
+    filename = f"{dir_name}\\{loadpoint}"
     pd.DataFrame(xPhys.reshape((nelx,nely))).to_csv(f'{filename}.csv', index=False, header=False)
     # 주의: plt로는 x, y 축으로 뜨지만 csv로 보면 행, 열로 뜸. (transposed)
 

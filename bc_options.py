@@ -3,14 +3,9 @@ import numpy as np
 import os
 
 # node 인덱스 리스트를 바탕으로 dof 인덱스를 줌.
-def xdof(l):
-    return np.array([_*2 for _ in l])
-
-def ydof(l):
-    return np.array([_*2+1 for _ in l])
-
-def xydof(l):
-    return np.array([_ for __ in l for _ in (__*2, __*2+1)])
+def xdof(l): return np.array([_*2 for _ in l])
+def ydof(l): return np.array([_*2+1 for _ in l])
+def xydof(l): return np.array([_ for __ in l for _ in (__*2, __*2+1)])
 
 def createFolder(directory):
     try:
@@ -20,117 +15,126 @@ def createFolder(directory):
     except OSError:
         print ('Error: Creating directory. ' +  directory)
 
+def loadpoints(nelx, nely, side):
+    # right, top, left, bottom
+    if side == 0:
+        for _ in range(nelx*(nely+1), (nelx+1)*(nely+1)): yield _
+    elif side == 1:
+        for _ in range(0, nelx*(nely+1)+1, nely+1): yield _
+    elif side == 2:
+        for _ in range(0, nely+1): yield _
+    elif side == 3:
+        for _ in range(nely, (nelx+1)*(nely+1), nely+1): yield _
 
-### Mother class for all structures defined by some fixed boundary conditions
+def lp2f(f, loadpoint):
+    # load point to f vector; for vertical down load.
+    f[*ydof([loadpoint]), 0] = -1
+    return f
+
+
+### Mother class
 class BC_mom():
-    def __init__(self, nelx, nely):
+    """Mother class for all structures defined by fixed dofs.
+    """
+    def __init__(self, nelx, nely, side):
         self.nelx = nelx
         self.nely = nely
+        self.side = side
         self.ndof = 2*(nelx+1)*(nely+1)
         self.dofs = np.arange(self.ndof)
         self.f = np.zeros((self.ndof, 1))
 
-
-### cantilever beam
-# Left fixed, point load at right
-class Cantilever(BC_mom):
-    def __init__(self, nelx, nely):
-        super().__init__(nelx, nely)
-        self.name = "Cantilever"
-        self.dirname = f"{self.name}_{nelx}x{nely}"
+        self.name = self.__class__.__name__
+        self.dirname = f"{self.name}_{nelx}x{nely}_{side}"
         createFolder(self.dirname)
-        self.fixed = np.sort(xydof(self.dofs[0:self.nely+1]))
 
-    def loadpoints(self):
-        for _ in range(self.nelx*(self.nely+1), (self.nelx+1)*(self.nely+1)): yield _
-
-    def lp2f(self, loadpoint):
-        ff = self.f.copy()
-        ff[*ydof([loadpoint]), 0] = -1
-        return ff
+    def loadpoints(self): return loadpoints(self.nelx, self.nely, self.side)
+    def lp2f(self, loadpoint): return lp2f(self.f.copy(), loadpoint)
 
 
-### Simply supported beam
-# Two bottom end point supported (pinned left, roller support right)
-# Point load on top
-class SimplySupported(BC_mom):
-    def __init__(self, nelx, nely):
-        super().__init__(nelx, nely)
-        self.name = "SimpleSupport"
-        self.dirname = f"{self.name}_{nelx}x{nely}"
-        createFolder(self.dirname)
+### Beams:
+class Simple(BC_mom):
+    """Simply supported beam; Pinned left, Supported right, Point load on top
+    """
+    def __init__(self, nelx, nely, side):
+        super().__init__(nelx, nely, side)
         self.fixed = np.sort(np.concatenate((xydof([nely]), ydof([(nelx+1)*(nely+1)-1]))))
 
-    def loadpoints(self):
-        for _ in range(0, self.nelx*(self.nely+1)+1, self.nely+1): yield _
 
-    def lp2f(self, loadpoint):
-        ff = self.f.copy()
-        ff[*ydof([loadpoint]), 0] = -1
-        return ff
-
-
-### Bridge structure
-# Two bottom end point fixed (not supported)
-# Point load on top
 class Bridge(BC_mom):
-    def __init__(self, nelx, nely):
-        super().__init__(nelx, nely)
-        self.name = "Bridge"
-        self.dirname = f"{self.name}_{nelx}x{nely}"
-        createFolder(self.dirname)
+    """Bridge structure; Pinned left, Pinned right, Point load on top
+    """
+    def __init__(self, nelx, nely, side):
+        super().__init__(nelx, nely, side)
         self.fixed = np.sort(np.concatenate((xydof([nely]), xydof([(nelx+1)*(nely+1)-1]))))
 
-    def loadpoints(self):
-        for _ in range(0, self.nelx*(self.nely+1)+1, self.nely+1): yield _
 
-    def lp2f(self, loadpoint):
-        ff = self.f.copy()
-        ff[*ydof([loadpoint]), 0] = -1
-        return ff
+class Cantil(BC_mom):
+    """Cantiliever beam; Left fixed, point load at right
+    """
+    def __init__(self, nelx, nely, side):
+        super().__init__(nelx, nely, side)
+        self.fixed = np.sort(xydof(self.dofs[0:nely+1]))
 
 
-### MBB beam (half of simply supported beam)
-# Left wall supported, right end supported
-# Point load on top
+class CantilProp(BC_mom):
+    """Propped Cantiliver; Fixed left, Supported right"""
+    def __init__(self, nelx, nely, side):
+        super().__init__(nelx, nely, side)
+        self.fixed = np.sort(np.concatenate((xydof(self.dofs[0:nely+1]), ydof([(nelx+1)*(nely+1)-1]))))
+
+
+class FixFix(BC_mom):
+    """Fixed-Fixed Cantilever beam
+    """
+    def __init__(self, nelx, nely, side):
+        super().__init__(nelx, nely, side)
+        self.fixed = np.sort(np.concatenate((xydof(self.dofs[0:nely+1]), xydof(self.dofs[nelx*(nely+1), (nelx+1)*(nely+1)]))))
+
+
 class MBB(BC_mom):
-    def __init__(self, nelx, nely):
-        super().__init__(nelx, nely)
-        self.name = "MBB"
-        self.dirname = f"{self.name}_{nelx}x{nely}"
-        createFolder(self.dirname)
+    """MBB beam; Left wall supported, right end supported, point load on top"""
+    def __init__(self, nelx, nely, side):
+        super().__init__(nelx, nely, side)
         self.fixed = np.sort(np.concatenate((xdof(self.dofs[0:nely+1]), ydof([(nelx+1)*(nely+1)-1]))))
 
-    def loadpoints(self):
-        for _ in range(0, self.nelx*(self.nely+1)+1, self.nely+1): yield _
 
-    def lp2f(self, loadpoint):
-        ff = self.f.copy()
-        ff[*ydof([loadpoint]), 0] = -1
-        return ff
+### Michells: (or Pragers)
+
+class MBeamHalf(BC_mom):
+    """ Michell Beam, fixed at upper corners. Similar to Bridge... 
+    """
+    def __init__(self, nelx, nely, side):
+        super().__init__(nelx, nely, side)
+        self.fixed = np.sort(np.concatenate((xydof([0]), xydof([nelx*(nely+1)]))))
 
 
-### Michell (point-supported cantilever beam)
-class Michell(BC_mom):
-    def __init__(self, nelx, nely):
-        super().__init__(nelx, nely)
-        self.name = "Michell"
-        self.dirname = f"{self.name}_{nelx}x{nely}"
-        createFolder(self.dirname)
+class MBeamFull(BC_mom):
+    """Michell Beam, fixed at middle. Similar to Bridge
+    """
+    def __init__(self, nelx, nely, side):
+        super().__init__(nelx, nely, side)
+        self.fixed = np.sort(np.concatenate((xydof([nely//2]), xydof([nelx*(nely+1)+nely//2]))))
+
+
+class MTruss(BC_mom):
+    """Prager Truss; Cantilever Michell.
+    """
+    def __init__(self, nelx, nely, side):
+        super().__init__(nelx, nely, side)
         self.fixed = np.sort(xydof([0, nely]))
 
-    def loadpoints(self):
-        for _ in range(self.nelx*(self.nely+1), (self.nelx+1)*(self.nely+1)): yield _
 
-    def lp2f(self, loadpoint):
-        ff = self.f.copy()
-        ff[*ydof([loadpoint]), 0] = -1
-        return ff
+
+
+
+
 
 
 
 """
-# 이렇게 보니까 빔+로드 1개로만 해도 참 다양하게 나온다.
+# 이렇게 보니까 빔 1개로만 해도 참 다양하게 나온다.
+# 아예 빔들에 대한 것으로만 해봐도 의미있고 재미있을 것 같다.
 
 ### L Bracket
 ### Plate With a hole
@@ -157,7 +161,7 @@ f[*xdof([loadpoint]), 0]=-1
 
 #### 구조의 종류
 # Beams (+ MBB)
-# Michell Structures (only corners)
+# Michell Structures (Cantilever but corners)
 # Frame/Columns
 
 # Passive elements? (empty/filled contrains)"""
