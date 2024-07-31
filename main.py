@@ -15,12 +15,12 @@ def createFolder(directory):
 
 if __name__ == "__main__":
     # Default input parameters
-    nelx, nely = 32, 32
+    nelx, nely = 96, 32
     volfrac, rmin = 0.4, 2.0    # 5.4; TODO: adaptive filter radius? (x0.04?)
     penal, ft = 3.0, 1          # ft==0 -> sens, ft==1 -> dens
 
-    # for bc in [Cantilever, SimplySupported, Bridge, MBB, Michell]:
     for bc in [Simple, Bridge, Cantil, CantilProp, FixFix, MBB, MBeamHalf, MBeamFull, MTruss]:
+        # FixFix is not working at any load-case. Hm...
         for side in [0, 1, 2, 3]:
             test = bc(nelx, nely, side)
             
@@ -30,12 +30,16 @@ if __name__ == "__main__":
             print(f"ndes: {nelx} x {nely}, {volfrac=}, {rmin=}, {penal=}")
 
             # iterate over varying load condition
-            try:
-                for loadpoint in test.loadpoints():
+
+            for loadpoint in test.loadpoints():
+                try:
                     main(nelx, nely, volfrac, penal, rmin, ft, test.fixed, test.lp2f(loadpoint), dirname, loadpoint)
+                except:
+                    continue
+
+            # plot created results neatly
+            try:
+                csv2fig(dirname, dirname, False)
             except:
                 continue
-            # plot created results neatly
-            
-            csv2fig(dirname, dirname, False)
     

@@ -89,7 +89,7 @@ class FixFix(BC_mom):
     """
     def __init__(self, nelx, nely, side):
         super().__init__(nelx, nely, side)
-        self.fixed = np.sort(np.concatenate((xydof(self.dofs[0:nely+1]), xydof(self.dofs[nelx*(nely+1), (nelx+1)*(nely+1)]))))
+        self.fixed = np.sort(np.concatenate((xydof(self.dofs[0:nely+1]), xydof(self.dofs[nelx*(nely+1):(nelx+1)*(nely+1)]))))
 
 
 class MBB(BC_mom):
