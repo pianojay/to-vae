@@ -26,9 +26,20 @@ def loadpoints(nelx, nely, side):
     elif side == 3:
         for _ in range(nely, (nelx+1)*(nely+1), nely+1): yield _
 
-def lp2f(f, loadpoint):
+def lp2f(f, loadpoint, theta=0):
     # load point to f vector; for vertical down load.
-    f[*ydof([loadpoint]), 0] = -1
+    # f[*ydof([loadpoint]), 0] = -1
+    # then how about load point to f vector, but a load  with a theta?
+    # theta would be considered as a new method of understanding the world.
+    f[*ydof([loadpoint]), 0] = -np.cos(theta)
+    f[*xdof([loadpoint]), 0] = -np.sin(theta)
+    # then the theta represents:
+    """________
+          /|
+         / |
+        /  v
+       <-theta
+    """
     return f
 
 
@@ -49,7 +60,7 @@ class BC_mom():
         createFolder(self.dirname)
 
     def loadpoints(self): return loadpoints(self.nelx, self.nely, self.side)
-    def lp2f(self, loadpoint): return lp2f(self.f.copy(), loadpoint)
+    def lp2f(self, loadpoint, theta=0): return lp2f(self.f.copy(), loadpoint, theta)
 
 
 ### Beams:

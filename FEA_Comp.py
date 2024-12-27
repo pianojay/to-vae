@@ -13,7 +13,7 @@ import pandas as pd
 from matplotlib import colors
 import matplotlib.pyplot as plt
 
-def main(nelx,nely,penal,rmin, fixed, f, x):
+def main(nelx, nely, volfrac, penal, rmin, ft, fixed, f, x):
     x = x.ravel()
     # fixed dofs and force matrix comes as an input.
     Emin, Emax = 1e-9, 1.0		# Max and min stiffness
@@ -83,7 +83,7 @@ def main(nelx,nely,penal,rmin, fixed, f, x):
     ce[:] = (np.dot(u[edofMat].reshape(nelx*nely,8),KE) * u[edofMat].reshape(nelx*nely,8) ).sum(1)
     obj=( (Emin+xPhys**penal*(Emax-Emin))*ce ).sum()
 
-    if True:
+    if False:
         _,ax = plt.subplots()
         ax.imshow(-xPhys.reshape((nelx,nely)).T, cmap='gray', interpolation='none', norm=colors.Normalize(vmin=-1,vmax=0))
         plt.show()
@@ -92,7 +92,7 @@ def main(nelx,nely,penal,rmin, fixed, f, x):
     return obj
 
 
-#element stiffness matrix
+#element stiffness matrix   
 def lk():
     E, nu = 1, 0.3
     k=np.array([1/2-nu/6,1/8+nu/8,-1/4-nu/12,-1/8+3*nu/8,-1/4+nu/12,-1/8-nu/8,nu/6,1/8-3*nu/8])
@@ -117,7 +117,5 @@ def deleterowcol(A, delrow, delcol):
 
 
 from bc_options import *
-def fea_c(nelx, nely, bc, side, loadpoint, x):
-    penal, rmin = 3.0, 2.0
-    test = bc(nelx, nely, side)
-    return main(nelx,nely,penal,rmin, test.fixed, test.lp2f(loadpoint), x)
+def fea_c(nelx, nely, volfrac, penal, rmin, ft, fixed, f, x): # XXX no backward compatibility. sorry
+    return main(nelx, nely, volfrac, penal, rmin, ft, fixed, f, x)

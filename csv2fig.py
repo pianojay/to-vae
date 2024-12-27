@@ -4,20 +4,20 @@ import pandas as pd
 from matplotlib import colors
 import matplotlib.pyplot as plt
 
-def csv2fig(directory_path, output_image_path, plt_show=True):
+def csv2fig(directory_path, output_image_path, plt_show=True, max_num = 30):
 
     numerical = lambda _: int(''.join(filter(str.isdigit, _)))
-    csv_files = sorted((f for f in os.listdir(directory_path) if f.endswith('.csv')), key = numerical)
+    csv_files = sorted((f for f in os.listdir(directory_path)[:max_num] if f.endswith('.csv')), key = numerical)
     num_files = len(csv_files)
-    print(num_files)
+    max_num = min(max_num, num_files)
+    print(f"{max_num}/{num_files}")
 
-    cols = math.ceil(math.sqrt(num_files))
-    rows = math.ceil(num_files / cols)
+    cols = math.ceil(math.sqrt(max_num))
+    rows = math.ceil(max_num / cols)
 
     fig, axes = plt.subplots(rows, cols)
     
-    axes = [axes] if num_files == 1 else axes
-    axes = axes.flatten()
+    axes = pd.array([axes]) if max_num == 1 else axes.flatten()
 
     
     for ax, csv_file in zip(axes, csv_files):
@@ -31,7 +31,7 @@ def csv2fig(directory_path, output_image_path, plt_show=True):
         # ax.axis('off')
 
 
-    for i in range(num_files, len(axes)):
+    for i in range(max_num, len(axes)):
         fig.delaxes(axes[i])
 
     plt.savefig(output_image_path)
