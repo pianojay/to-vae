@@ -1,6 +1,7 @@
 # Project history
 
-This archive brings together several stages of the same 2024 KAIST project.
+This archive brings together several stages of a project undertaken through the
+**2024 Summer/Fall KAIST Undergraduate Research Program (URP)**.
 The changing methods explain the mixture of datasets, VAE notebooks, PPO
 prototypes, and interpolation experiments.
 
@@ -57,6 +58,6 @@ method. The [final-report summary](../research/final-study.md) explains its
 settings and findings in more detail.
 
 The original repository's last commit is dated December 27, 2024. The archive
-organization and summaries were added in November 2026. The report's “Long-Term”
-header and the proposal's Summer/Fall label differ; this archive therefore uses
-the neutral description **2024 KAIST undergraduate research project**.
+organization and summaries were added in November 2026. The researcher confirmed
+participation in the **2024 Summer/Fall** program; that identification is used
+throughout the archive.

@@ -2,9 +2,9 @@
 
 **VAE 잠재 벡터를 활용한 위상최적화**
 
-A research archive of a **2024 KAIST undergraduate project** by **Jaeuk Kim**,
-Department of Mechanical Engineering. Advisor: **Ikjin Lee**. Teaching assistant:
-**Jihwan Park**.
+A research archive from the **2024 Summer/Fall KAIST Undergraduate Research
+Program (URP)**, by **Jaeuk Kim**, Department of Mechanical Engineering.
+Advisor: **Ikjin Lee**. Teaching assistant: **Jihwan Park**.
 
 The project explored whether previously optimized structures could help predict
 new designs without repeating the full optimization process. A variational

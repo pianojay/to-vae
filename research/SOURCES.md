@@ -9,6 +9,10 @@ The original collection was `/mnt/DD/24-2 Bellis/URP/`. Paths below are relative
 to that collection; `Desktop.zip :: …` identifies a member of that ZIP. Hashes
 identify the reviewed document bytes, not the newly written summaries.
 
+Program identification follows the researcher's clarification: **2024 Summer/Fall
+KAIST Undergraduate Research Program (URP)**. This resolves the differing program
+labels in historical document headers.
+
 The final report ([S16](#s16)) is primary for the completed study. Earlier drafts
 and weekly notes explain its development; a recorded plan is not treated as a
 completed result. All summaries were prepared during archive organization in

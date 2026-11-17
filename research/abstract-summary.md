@@ -2,6 +2,8 @@
 
 **Title:** Topology Optimization Utilizing VAE Latent Vector
 
+**Program:** 2024 Summer/Fall KAIST Undergraduate Research Program (URP)
+
 **Researcher:** Jaeuk Kim, Mechanical Engineering, KAIST
 
 **Advisor:** Ikjin Lee

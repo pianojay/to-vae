@@ -5,7 +5,8 @@
 **VAE 잠재 벡터를 활용한 위상최적화**
 
 Jaeuk Kim, Department of Mechanical Engineering, KAIST. Advisor: Ikjin Lee.
-Teaching assistant: Jihwan Park. This summary draws primarily on the
+Teaching assistant: Jihwan Park. Conducted through the **2024 Summer/Fall KAIST
+Undergraduate Research Program (URP)**. This summary draws primarily on the
 [submitted final report](SOURCES.md#s16), its [editable draft](SOURCES.md#s06),
 and the [workshop abstract](SOURCES.md#s01). The draft is dated December 27, 2024.
 
