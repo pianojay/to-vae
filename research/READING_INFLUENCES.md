@@ -29,6 +29,24 @@ Evidence: [July direction slides, numbered slides 1–3](SOURCES.md#s03).
 The [week-five notes](SOURCES.md#s15) also name the 2022 RL paper as a prototype
 reference, but do not establish line-by-line code derivation.
 
+### World Models as a contemporary VAE-and-control reference
+
+The 2024 research-direction slide deck explicitly lists **World Models (2018)**,
+attributed there to David Ha et al., under a section on VAE × RL in AI. The slide
+summarizes three components: V for vision/compression using a VAE, M for RNN-based
+memory, and C for control. Its introductory point is to compress the situation
+with a VAE so an RL agent can make decisions more efficiently.
+
+This records World Models as a **conceptual reference for combining learned
+representations with control during the original research**, beyond its presence
+in the saved PDF collection. It does not establish adoption of the paper's RNN
+memory component in the topology prototype. The same slide also discusses DARLA
+and variational state encoding as related representation-learning/RL work.
+
+Evidence: [research-direction slides, section “VAE x RL”, numbered slide 19](SOURCES.md#s03).
+The saved PDF is recorded in the [paper inventory](../references/paper-inventory.tsv)
+as `misc/no(no)/VAE + RL (any)/Pure/World Models.pdf` inside `Desktop.zip`.
+
 ### Implementing the VAE and questioning its generality
 
 Week-four notes explicitly identify the 2018 *An Indirect…* paper as a reference
@@ -85,8 +103,8 @@ and [final report, section 4.2](SOURCES.md#s16).
 In November 2026, while organizing this archive, the researcher explained that
 his understanding of reinforcement learning in 2024 was not yet sufficient to
 carry the proposed RL approach through. This was the reason he dropped that
-direction. He continues to find the idea interesting and mentions world models
-as a conceptual connection in his present-day reflection.
+direction. He continues to find the idea interesting. World Models also appears explicitly
+in the original direction slides, as documented above.
 
 This account supplies the personal reason for the change of direction. It is
 retrospective testimony from the researcher, separate from the contemporaneous
