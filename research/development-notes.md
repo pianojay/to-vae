@@ -60,6 +60,11 @@ not been completed as one integrated workflow. The archive therefore labels the
 [demo sketch](../code/demo.txt) as prototypes, not the final method.
 Source: [week five](SOURCES.md#s15).
 
+The researcher later clarified that he dropped the RL approach because his
+understanding of RL at the time was not yet sufficient to realize it. This is
+recorded separately as a [retrospective account](READING_INFLUENCES.md#researcher-recollection-why-the-rl-direction-was-dropped),
+rather than attributed to the original weekly notes.
+
 ## Transition toward interpolation
 
 Later editable notes discuss using existing optimal designs to estimate an

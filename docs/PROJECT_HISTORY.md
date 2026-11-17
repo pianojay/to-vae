@@ -27,6 +27,11 @@ final method. Sources: [proposal](../research/SOURCES.md#s05),
 [week three](../research/SOURCES.md#s13), [week four](../research/SOURCES.md#s14),
 and [week five](../research/SOURCES.md#s15).
 
+In a [retrospective account given during archiving](../research/READING_INFLUENCES.md#researcher-recollection-why-the-rl-direction-was-dropped),
+the researcher explained that he dropped the RL direction because his understanding
+of reinforcement learning at the time was not yet sufficient to carry it through.
+This personal explanation complements the weekly record of an incomplete prototype.
+
 ## Later direction: interpolate between known designs
 
 Later research notes discuss using existing optimized designs to estimate a

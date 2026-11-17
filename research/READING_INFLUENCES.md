@@ -80,6 +80,20 @@ an originating paper for that choice is not established.
 Evidence: [later editable notes, opening discussion and interpolation sections](SOURCES.md#s07)
 and [final report, section 4.2](SOURCES.md#s16).
 
+## Researcher recollection: why the RL direction was dropped
+
+In November 2026, while organizing this archive, the researcher explained that
+his understanding of reinforcement learning in 2024 was not yet sufficient to
+carry the proposed RL approach through. This was the reason he dropped that
+direction. He continues to find the idea interesting and mentions world models
+as a conceptual connection in his present-day reflection.
+
+This account supplies the personal reason for the change of direction. It is
+retrospective testimony from the researcher, separate from the contemporaneous
+weekly notes, which document the incomplete prototype. It does not establish a
+precise date for the decision or an experimental assessment of the approach's
+feasibility.
+
 ## Recorded reading with thinner decision evidence
 
 The final report cites foundational VAE, β-VAE, SIMP, and topology-optimization
@@ -98,7 +112,7 @@ These are gaps in the historical account, not proposed research work:
 
 | Question | What is already recorded | What a physical note or recollection could add |
 | --- | --- | --- |
-| What prompted the move away from RL, and when? | Earlier RL prototypes; later TA/seminar reflection; eventual interpolation workflow | A dated meeting, practical obstacle, or explicit decision to change direction |
+| When was the move away from RL made? | The researcher has clarified the reason: his understanding of RL was not yet sufficient to carry the approach through | A dated note locating the decision in the project timeline |
 | Which readings most directly changed the later method? | Discussion of latent crossover, latent optimization, GP/BO, and alternative interpolators | Paper-specific annotations distinguishing an adopted idea from a comparison or rejected idea |
 | Why choose latent dimension 16 and the β settings? | Final settings and named model snapshots | The original tradeoff, trial comparison, or recommendation behind those choices |
 | What supplied implementation details? | Named conceptual references and preserved solver credits | Which tutorials, repositories, or paper algorithms supplied specific model/PPO details |
