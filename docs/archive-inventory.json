@@ -1,0 +1,14 @@
+{
+  "original_commit": "b5fabb8e869eb6bb61dc3c2cb2fb9c6843e5e6a7",
+  "original_branch": "original_backup",
+  "original_tracked_files": 24674,
+  "original_bytes": 868216043,
+  "dispositions": {
+    "relocated": 24163,
+    "replaced_documentation": 1,
+    "consolidated_duplicate": 505,
+    "omitted_generated_cache": 5
+  },
+  "retained_files": 24163,
+  "retained_bytes": 854816652
+}
