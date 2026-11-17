@@ -3,6 +3,8 @@
 This summary connects the proposal, weekly notes, and later research notes to
 the material in the repository. It describes the work as recorded at each stage;
 ideas listed as plans in old notes are not assumed to have been completed.
+[Reading influences](READING_INFLUENCES.md) separates documented connections
+between papers and decisions from citations whose influence is not established.
 
 ## Proposal and early direction
 

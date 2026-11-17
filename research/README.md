@@ -6,6 +6,8 @@ or claims of newly reproduced findings. Understanding them requires no access
 to the original external folder.
 
 - [Final study](final-study.md): problem, method, settings, and reported findings.
+- [Reading influences](READING_INFLUENCES.md): documented links from papers and
+  discussions to decisions, plus gaps for the physical records.
 - [Development notes](development-notes.md): proposal, dataset generation, VAE
   reconstruction, RL prototype, and shift toward interpolation.
 - [Workshop abstract summary](abstract-summary.md): a short account of the final

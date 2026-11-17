@@ -1,7 +1,8 @@
 # Reference papers and reading record
 
 The research records contain both a final-report bibliography and saved digital
-papers. This page makes those references discoverable alongside the code archive.
+papers. For documented connections between reading and research decisions, see
+[How the reading shaped the research](../research/READING_INFLUENCES.md). This page makes those references discoverable alongside the code archive.
 The [paper inventory](paper-inventory.tsv) identifies saved PDFs, their original
 ZIP locations, sizes, hashes, and byte-identical copies. The PDFs themselves
 remain in the owner's external collection; this repository records their context
@@ -14,7 +15,7 @@ This is the historical reading record, rather than a newly standardized bibliogr
 “Found” means a corresponding title was located in the digital collection; it
 does not establish which particular PDF version was cited.
 
-| Reference | Role in the study | Digital copy located |
+| Reference | Topic/context (not a claim of influence) | Digital copy located |
 | --- | --- | --- |
 | Bendsøe and Sigmund, *Topology Optimization: Theory, Methods and Applications* (2003) | Structural/topology-optimization background | Found in `Desktop.zip`, under `misc/` |
 | Woldseth et al., *On the Use of Artificial Neural Networks in Topology Optimisation* (2022) | Context and evaluation of neural methods for topology optimization | Found under `Review & Educational/` |
